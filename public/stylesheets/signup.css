@@ -1,0 +1,134 @@
+
+/* ***********
+*** Signup ***
+************ */
+
+.s-container{
+    background-color:transparent;
+    border-radius:4px;
+    padding:0;
+    margin:0 0 10px 0;
+    border-top-left-radius:8px;
+    border-bottom-left-radius:8px;
+}
+
+.s-left-inner{
+    background-color:var(--primary-color);
+    height:100%;
+    color:white;
+    padding:10px;
+    border-top-left-radius:8px;
+    border-bottom-left-radius:8px;
+}
+
+.s-left-inner h1{
+    font-family:'Montserrat Bold';
+}
+
+.s-right-inner{
+    background-color:#eeeeee;
+    height:calc(100% + 20px);
+    padding:20px;
+    margin-top:-10px;
+    border-top-right-radius:8px;
+    border-bottom-right-radius:8px;
+    -webkit-box-shadow:-20px 0px 35px 0px rgba(3,0,0,0.3);
+            box-shadow:-20px 0px 35px 0px rgba(3,0,0,0.3);
+}
+
+.fm-group{
+    float:left;
+    padding:4px;
+}
+
+.fm-group .addon{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-negative: shrink;
+        flex-shrink: shrink;
+}
+
+
+.fm-group .addon .addon-first{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top:4px;
+}
+
+.fm-group label{
+    font-family:'Montserrat Bold';
+    font-size:0.8rem;
+}
+
+.fm-group input[type="text"],input[type="password"]{
+    border:none;
+    display:block;
+    border-bottom:2px solid rgba(75, 75, 75,0.3);
+    width:100%;
+    padding:4px;
+    background-color:inherit;
+    font-family:'Roboto';
+}
+
+
+.fm-group input[type="text"]:hover,input[type="password"]:hover,
+.fm-group input[type="text"]:focus,input[type="password"]:focus{
+    border-bottom:2px solid var(--primary-color);
+}
+.fm-group .addon input[type="text"],.fm-group .addon input[type="password"]{
+    width:1%;
+    display:-webkit-box;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-flex:1;
+        -ms-flex:1 1 auto;
+            flex:1 1 auto;
+}
+.fm-group-6{
+    width:50%;
+    max-width:50%;
+}
+
+.fm-group-12{
+    width:100%;
+    max-width:100%;
+}
+
+.fm-group-white{
+    background-color:white;
+}
+.btn-xprimary{
+    background:var(--primary-color);
+    color:white;
+    font-family:'Roboto Condensed';
+    font-size:1.2rem;
+}
+
+.sup-left-ul{
+    list-style:none;
+}
+
+
+@media screen and (max-width:770px){
+    .s-left-inner{
+        border-top-right-radius:4px;
+        border-top-left-radius: 4px;
+    }
+    .s-right-inner{
+        border-top-right-radius:0px;
+        border-top-left-radius: 0px;
+        border-bottom-right-radius:4px;
+        border-bottom-left-radius: 4px;
+        -webkit-box-shadow:none;
+        box-shadow:none;
+    }
+    .s-container{
+        -webkit-box-shadow:0px 0px 35px 0px rgba(3,0,0,0.3);
+        box-shadow:0px 0px 35px 0px rgba(3,0,0,0.3);       
+    }
+    
+}

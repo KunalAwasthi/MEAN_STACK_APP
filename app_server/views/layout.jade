@@ -3,9 +3,33 @@ html
   head
     title= title
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/bootstrap/bootstrap.css')
-    script(src='/javascripts/jquery-3.3.1.min.js')
-    script(src='/bootstrap/bootstrap.js')
+    link(rel='stylesheet',href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/stylesheets/signup.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header
+      .bg-head.pl-4.pr-4
+          .navbar.navbar-fixed.navbar-expand-lg
+              a(href='#').navbar-brand.mb-3.mt-3 Logo
+              button(type='button',data-toggle='collapse',data-target='#navbarSupportedContent',aria-expanded='false').navbar-toggler
+                  span.fa.fa-bars
+              .collapse.navbar-collapse#navbarSupportedContent
+                  ul.navbar-nav.mr-auto#search-combo-container
+                      li#search-combo.nav-item
+                          input(type='text').search-input
+                          a.btn.btn-white.search-btn
+                            span.fa.fa-search
+                  ul.rightbar-nav.ml-auto
+                      li.nav-item
+                          a(class='btn btn-signin',href="#") Sign in
+                      li.nav-item
+                          a(class='btn btn-signup',href="#") Sign up
+    .container
+      block content
+    footer
+    .row.m-0
+      .col-xs-12
+      small.mx-auto &copy; Kunal Awasthi 2018
+script(src='/javascripts/jquery-3.3.1.min.js')
+script(src='/bootstrap/bootstrap.js')
