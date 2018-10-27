@@ -37,8 +37,9 @@
 }
 
 .fm-group{
-    float:left;
+    position: relative;
     padding:4px;
+    display: inline-block;
 }
 
 .fm-group .addon{
@@ -60,6 +61,7 @@
 }
 
 .fm-group label{
+    display: block;
     font-family:'Montserrat Bold';
     font-size:0.8rem;
 }
@@ -69,9 +71,63 @@
     display:block;
     border-bottom:2px solid rgba(75, 75, 75,0.3);
     width:100%;
+    padding:0px 4px 4px 4px;
+    background-color:inherit;
+    font-family:'Roboto';
+}
+
+.fm-group textarea{
+    display:block;
+    border:2px solid rgba(75, 75, 75,0.3);
+    width:100%;
     padding:4px;
     background-color:inherit;
     font-family:'Roboto';
+}
+
+.fm-group textarea:hover,textarea:focus{
+    border:2px solid var(--primary-color);
+}
+
+
+.fm-group .select-caret
+{
+    position: absolute;
+    display:block;
+    right:0;
+    text-align:center;
+    padding:0 5px 0 0;
+    color:var(--primary-color);
+}
+
+
+.fm-group .select-wrap{
+    position: absolute;
+    left:0;
+    display:block;
+    border-bottom:2px solid rgba(75, 75, 75,0.3);
+    width:100%;
+    background-color:inherit;
+    font-family:'Roboto';
+    margin-top:-4px;
+    padding:5px 10px;
+}
+
+.fm-group select{
+    border:none;
+    display:block;
+    border-bottom:2px solid rgba(75, 75, 75,0.3);
+    width:100%;
+    padding:4px;
+    background-color:inherit;
+    font-family:'Roboto';
+    height:100%;
+    opacity:0;
+}
+
+
+.fm-group select:hover{
+    border-bottom:2px solid var(--primary-color);
 }
 
 

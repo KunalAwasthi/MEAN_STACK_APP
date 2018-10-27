@@ -1,59 +1,28 @@
 extends layout
-
+include __includes
 block content
     #banner.page-header
         .row
             .col-lg-6.font-Montserrat
-                h1.font-Montserrat-Bold loc8er -
-                  small.font-Montserrat &nbsp;Find places to work with wifi new you !
+                h1.font-Montserrat-Bold #{header.headerText} -
+                  small.font-Montserrat &nbsp;#{header.slogan}
     .row
         .col-xs-12.col-sm-8.font-Montserrat
-            p List area.
+            
             .list-group
-                .col-xs-12.list-group-item
-                    h4 
-                      a(href='/location') Starcup&nbsp;
-                      small
-                         span.fa.fa-star.star-filled
-                         span.fa.fa-star.star-filled
-                         span.fa.fa-star.star-filled
-                         span.fa.fa-star
-                         span.fa.fa-star
-                      small.pull-right.badge.badge-info 120m
-                    p 125, Jump Street, NY
-                    span.badge.badge-warning.ml-1 Hot Drinks
-                    span.badge.badge-warning.ml-1 Wifi
-                    span.badge.badge-warning.ml-1 Cakes
-                    span.badge.badge-warning.ml-1 Street View            
-                .col-xs-12.list-group-item
-                    h4 
-                        a(href='/location') Starcup&nbsp;
-                        small
-                            span.fa.fa-star.star-filled
-                            span.fa.fa-star.star-filled
-                            span.fa.fa-star.star-filled
-                            span.fa.fa-star
-                            span.fa.fa-star
-                        small.pull-right.badge.badge-info 120m
-                        p 125, Jump Street, NY
-                    span.badge.badge-warning.ml-1 Hot Drinks
-                    span.badge.badge-warning.ml-1 Wifi
-                    span.badge.badge-warning.ml-1 Cakes
-                    span.badge.badge-warning.ml-1 Street View 
-                .col-xs-12.list-group-item
-                    h4 
-                        a(href='/location') Starcup&nbsp;
-                        small
-                            span.fa.fa-star.star-filled
-                            span.fa.fa-star.star-filled
-                            span.fa.fa-star.star-filled
-                            span.fa.fa-star
-                            span.fa.fa-star
-                        small.pull-right.badge.badge-info 120m
-                    p 125, Jump Street, NY
-                    span.badge.badge-warning.ml-1 Hot Drinks
-                    span.badge.badge-warning.ml-1 Wifi
-                    span.badge.badge-warning.ml-1 Cakes
-                    span.badge.badge-warning.ml-1 Street View
+            
+                each location in locations
+            
+                    .col-xs-12.list-group-item
+                        h4
+                            a(href='/location') #{location.name}&nbsp;
+                            small
+                                +getRating(location.rating)
+                        p.pull-right.badge.badge-info #{location.distance}m
+                        
+                        p #{location.address}
+                        
+                        +getfacilities(location.facilities)
+        
         .col-xs-12.col-sm-4
             p.lead.font-Montserrat Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.

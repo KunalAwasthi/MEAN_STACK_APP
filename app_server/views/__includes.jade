@@ -1,0 +1,9 @@
+mixin getRating(rating)
+    - for(var i = 1 ; i <= rating ; i++)
+        span.fa.fa-star.star-filled
+    - for(var i = rating + 1 ; i <= 5 ; i++)
+        span.fa.fa-star    
+mixin getfacilities(arr)
+    each item in arr
+        span.badge.badge-warning.ml-1 #{item}
+ 

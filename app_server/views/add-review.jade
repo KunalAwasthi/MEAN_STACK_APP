@@ -1,0 +1,27 @@
+extends layout
+block content
+    h1 Add Review
+    hr
+    .form
+        .row
+        .col-sm-6.col-xs-12.mx-auto
+            .col-sm-12.p-0.mb-2
+                .fm-group.fm-group-12
+                    label Shop Name
+                    input(type='text',name='shopname')
+            .col-sm-12.p-0.mb-2
+                .fm-group.fm-group-12
+                    label Ratings
+                    span.select-wrap
+                    span.select-caret
+                            span.fa.fa-caret-down
+                    select(name='rating')#rating-spinner
+                        - for (var i = 1; i <= 5; i++)
+                            option(value=i) #{i}
+            .col-sm-12.p-0.mb-2
+                .fm-group.fm-group-12
+                    label Review
+                    textarea(name='review')
+            .col-sm-12.p-1
+                button.btn.btn-block.btn-xprimary Submit
+
