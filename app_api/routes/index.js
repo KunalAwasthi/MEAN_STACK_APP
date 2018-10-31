@@ -16,9 +16,9 @@ router.delete('/locations/:locationid',ctrlLocations.deleteLocation);
 /**
  * location reviews 
 */
-router.post('/locations/:locationid/reviews',ctrlReviews.saveReview);
-router.get('/locations/:locationid/reviews/:reviewid',ctrlReviews.readOne);
-router.put('/locations/:locationid/reviews/:reviewid',ctrlReviews.updateReview);
-router.delete('/locations/:locationid/reviews/:reviewid',ctrlReviews.deleteReview);
+router.get('/locations/:locationid/reviews/:reviewid',ctrlReviews.readOne); //read
+router.post('/locations/:locationid/reviews',ctrlReviews.saveReview); //create
+router.put('/locations/:locationid/reviews/:reviewid',ctrlReviews.updateReview); //update
+router.delete('/locations/:locationid/reviews/:reviewid',ctrlReviews.deleteReview); //delete
 
 module.exports = router;

@@ -1,20 +1,74 @@
 var mongoose = require('mongoose');
 var Loc = mongoose.model('Location');
-var CODE_SUCCESS = 200;
 
 sendJsonResponse = (res,code,content) => {
     res.status(code);
     res.json(content);
 };
 
+var theEarth = (function(){
+    var earthRadius = 6371; // km, miles is 3959
+    
+    var getDistanceFromRads = function(rads) {
+        return parseFloat(rads * earthRadius);
+    };
+
+    var getRadsFromDistance = function(distance) {
+        return parseFloat(distance / earthRadius);
+    };
+    return {
+        getDistanceFromRads : getDistanceFromRads,
+        getRadsFromDistance : getRadsFromDistance
+    };
+})();
+
 module.exports.locationListByDistance = function(req,res){
-    Loc.find()
-    .exec(function(err,Location){
-        if(err){
-            sendJsonResponse(res, 204,err);
+    var lng = parseFloat(req.query.lng);
+    var lat = parseFloat(req.query.lat);
+    var geoOptions = {
+        spherical:true,
+        maxDistance:theEarth.getRadsFromDistance(100),
+        num:10
+    };
+    var points = {
+        type:'Points',
+        coordinates:[lng,lat]
+    };
+    Loc.aggregate(
+        [{
+          '$geoNear': {
+            'near': points,
+            'spherical': geoOptions.spherical,
+            'distanceField': 'dist.calculated',
+            'maxDistance': geoOptions.maxDistance
+          }
+        }],
+        function(err, results) {
+            if (err) {
+                sendJsonResponse(res, 404, err);
+            } else {
+                locations = buildLocationList(req, res, results);
+                sendJsonResponse(res, 200, locations);
+            }
         }
-        sendJsonResponse(res, 200,Location);
+    )
+};
+
+
+var buildLocationList = function(req, res, results) {
+    console.log('buildLocationList:');
+    var locations = [];
+    results.forEach(function(doc) {
+        locations.push({
+          distance: doc.dist.calculated,
+          name: doc.name,
+          address: doc.address,
+          rating: doc.rating,
+          facilities: doc.facilities,
+          _id: doc._id
+        });
     });
+    return locations;
 };
 
 module.exports.saveLocation = function(req,res){

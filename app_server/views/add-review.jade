@@ -2,13 +2,13 @@ extends layout
 block content
     h1 Add Review
     hr
-    .form
+    form(action='/location/'+locationid+'/review/add',method='POST')
         .row
         .col-sm-6.col-xs-12.mx-auto
             .col-sm-12.p-0.mb-2
                 .fm-group.fm-group-12
-                    label Shop Name
-                    input(type='text',name='shopname')
+                    label Name
+                    input(type='text',name='author')
             .col-sm-12.p-0.mb-2
                 .fm-group.fm-group-12
                     label Ratings

@@ -1,43 +1,53 @@
 extends layout
 include __includes.jade
 block content
-    h1 Starcups
-    hr
+    h1 #{location.name}
     .row
         .col-xs.12.col-sm-8
+            hr
             .row
                 .col-xs-12.col-sm-6
-                    +getRating(rating)
-                    p #{address}
+                    +getRating(location.rating)
+                    p #{location.address}
                     .card.card-primary
                         .card-header
                             Opening Hours
                         .card-body
-                            each hour in hours
-                                p #{hour}
+                            each time in location.openingTimes
+                                div.mt-2
+                                    p.m-0 #{time.day}
+                                    p.m-0 #{time.opening} - #{time.closing}
+                                    .badge.badge-info #{time.closed ? 'Closed' : 'Open'}
                     .card.card-primary.mt-4
                         .card-header
                             p Facilities
                         .card-body
-                            +getfacilities(facilities)
+                            +getfacilities(location.facilities)
                 .col-xs-12.col-sm-6
                     .card.card-primary
                         .card-header
                             p.p-0.m-0 Map Cordinates
                         .card-body
-                            img(src='https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyD1VqbTSDkwop5wWEDMBi5UPHRA4Nb2Lcs',width='100%',height='100%').img.img-responsive.rounded
+                            img(src='https://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lng},#{location.coords.lat}&scale=1&zoom=19&size=400x400&maptype=roadmap&markers=color:green%7Clabel:#{location.name[0]}%7C#{location.coords.lng},#{location.coords.lat}&key=AIzaSyD1VqbTSDkwop5wWEDMBi5UPHRA4Nb2Lcs',width='100%',height='100%').img.img-responsive.rounded
             .row.mt-4
                 .col-lg-12
-                    .card.card-primary
-                        .card-header
-                            p Customer Reviews
-                        .card-body
-                            .list-group.list-stripped
-                                each review in reviews
-                                    .list-group-item
-                                        +getRating(review.rating)
-                                        b
-                                            span &nbsp;#{review.name}
-                                        small &nbsp;#{review.date}
+                    div.mb-2.clearfix
+                      span Customer Reviews 
+                      a(href='/location/'+location._id+'/review/new',class='btn btn-success float-right') Add Review
+                        span.fa.fa-plus
+                    each review in location.reviews
+                        .card.mb-2
+                            .card-header
+                                p.p-0.m-0
+                                   b
+                                    span &nbsp;#{review.author}
+                                small &nbsp;
+                                    +fixDate(review.timestamp)
+                                small.pl-2
+                                +getRating(review.rating)
+                            .card-body
+                                p.p-2 #{review.reviewText}
         .col-xs.12.col-sm-4
-            p #{description}
+            p #{location.name+' '+sidebar.context}
+            p 
+              small #{sidebar.callToAction}

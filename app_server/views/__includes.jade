@@ -6,4 +6,12 @@ mixin getRating(rating)
 mixin getfacilities(arr)
     each item in arr
         span.badge.badge-warning.ml-1 #{item}
- 
+
+mixin fixDate(dateString)
+    -var date = new Date(dateString);
+    -var months = ["January","February","March","April","May","June","July","Augest","September","October","November","December"];
+    -var day = date.getDate();
+    -var month = months[date.getMonth()];
+    -var year = date.getFullYear();
+    -var output = day + ' ' + month + ' ' + year;
+    =output
