@@ -84,7 +84,6 @@ module.exports.locationInfo = function(req, res){
 };
 
 RenderSingleLocationData = function(req,res,body){
-    console.log(body);
     res.render('location-info',{
             'title':'Loc8er - Find places to work with wifi new you !',
             header:{
