@@ -144,6 +144,11 @@
         -ms-flex:1 1 auto;
             flex:1 1 auto;
 }
+.fm-group-3{
+    width:25%;
+    max-width:25%;
+}
+
 .fm-group-6{
     width:50%;
     max-width:50%;

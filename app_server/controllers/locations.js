@@ -5,32 +5,11 @@ var apiOptions = {
 };
 
 module.exports.homeList = function(req, res){
-    var requestOptions,path;
-    path = '/api/locations';
-    requestOptions = {
-        url:apiOptions.server+path,
-        json:{},
-        method:'GET',
-        qs:{
-            lng:26.289489,
-            lat:73.028683,
-            maxDistance:20
-        },
-    };
-
-    request(requestOptions,function(err,response,body){
-        var data = body;
-        for(let i = 0 ; i < data.length ; i++)
-        {
-            data[i].distance = _fixDistance(data[i].distance); 
-        }
-        RenderHomePageList(req,res,data);
-    });
-
+    RenderHomePageList(req,res);
 };
 
 _fixDistance = function (Distance) {
-   if(Distance > 1){
+    if(Distance > 1){
         return parseFloat(Distance).toFixed(1)+'km';
    } else {
        return parseInt(Distance * 1000,10) + 'm';
@@ -54,7 +33,6 @@ RenderHomePageList = function(req,res,body){
                 headerText:'Loc8er',
                 slogan:'Find places to work with wifi new you !'
             },
-            locations:body,
             message:message
         }
     );

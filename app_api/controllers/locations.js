@@ -7,13 +7,14 @@ sendJsonResponse = (res,code,content) => {
 };
 
 var theEarth = (function(){
-    var earthRadius = 6371; // km, miles is 3959
+    var earthRadius = 6378; // km, miles is 3959 
     
     var getDistanceFromRads = function(rads) {
         return parseFloat(rads * earthRadius);
     };
 
     var getRadsFromDistance = function(distance) {
+        distance *= 1000;
         return parseFloat(distance / earthRadius);
     };
     return {
@@ -25,27 +26,31 @@ var theEarth = (function(){
 module.exports.locationListByDistance = function(req,res){
     var lng = parseFloat(req.query.lng);
     var lat = parseFloat(req.query.lat);
+    var maxDistance = parseInt(req.query.maxDistance);
     var geoOptions = {
         spherical:true,
-        maxDistance:theEarth.getRadsFromDistance(100),
+        maxDistance:theEarth.getRadsFromDistance(maxDistance),
         num:10
     };
     var points = {
-        type:'Points',
-        coordinates:[lng,lat]
+        type:'Point',
+        coordinates:[lat,lng]
     };
-    Loc.aggregate(
-        [{
-          '$geoNear': {
-            'near': points,
-            'spherical': geoOptions.spherical,
-            'distanceField': 'dist.calculated',
-            'maxDistance': geoOptions.maxDistance
+    console.log(geoOptions.maxDistance * 1000);
+    Loc.aggregate([
+        {
+          $geoNear: {
+             near: points,
+             distanceField: "dist.calculated",
+             maxDistance:geoOptions.maxDistance * 1000,
+             num: 10,
+             spherical: true
           }
-        }],
-        function(err, results) {
+        }
+     ]   
+    ,function(err, results) {
             if (err) {
-                sendJsonResponse(res, 404, err);
+                sendJsonResponse(res, 500, err);
             } else {
                 locations = buildLocationList(req, res, results);
                 sendJsonResponse(res, 200, locations);
@@ -78,13 +83,13 @@ module.exports.saveLocation = function(req,res){
         facilities:arr.facilities.split(","),
         coords:[parseFloat(arr.lng),parseFloat(arr.lat)],
         openingTimes:[{
-                        days: arr.day1,
+                        day: arr.day1,
                         opening: arr.opening1,
                         closing: arr.closing1,
                         closed: arr.closed1,
                     }, 
                     {
-                        days: arr.day2,
+                        day: arr.day2,
                         opening: arr.opening2,
                         closing: arr.closing2,
                         closed: arr.closed2,

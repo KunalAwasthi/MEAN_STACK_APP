@@ -8,21 +8,18 @@ block content
                   small.font-Montserrat &nbsp;#{header.slogan}
     .row
         .col-xs-12.col-sm-8.font-Montserrat
-            .error #{message}
+            .error {{ message }}
             .list-group
-            
-                each location in locations
-            
-                    .col-xs-12.list-group-item
-                        h4
-                            a(href='/location/#{location._id}') #{location.name}&nbsp;
-                            small
-                                +getRating(location.rating)
-                        p.pull-right.badge.badge-info #{location.distance}
-                        
-                        p #{location.address}
-                        
-                        +getfacilities(location.facilities)
-        
+                .fm-group.fm-group-3
+                    label(for="filter") Filter results
+                    input#filter(type="text", name="filter", ng-model="textFilter")
+                .col-xs-12.list-group-item(ng-repeat="location in data.locations | filter: textFilter")
+                    h4
+                        a(href='/location/{{ location._id }}') {{ location.name }}&nbsp;
+                        small(star-rating,rating="location.rating")
+                    p.pull-right.badge.badge-info {{ location.distance | fixDistance}}
+                    p {{ location.address }}
+                    span(ng-repeat='facility in location.facilities').badge.badge-warning.ml-1 {{ facility }}
+    
         .col-xs-12.col-sm-4
             p.lead.font-Montserrat Looking for wifi and a seat? Loc8r helps you find places to work when out and about. Perhaps with coffee, cake or a pint? Let Loc8r help you find the place you're looking for.
