@@ -186,3 +186,7 @@ a:hover{
     text-decoration:none;
     color:inherit;
 }
+
+.modal{
+    display: block;
+}

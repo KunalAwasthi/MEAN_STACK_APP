@@ -1,0 +1,52 @@
+<div class="modal-content">
+    <form class="form form-horizontal" ng-submit="vm.onSubmit()">
+        <div class="modal-header">
+            <h4 id="myModalLabel" class="modal-title">Add your review for {{ vm.locationData.locationName }}</h4>
+            <button type="button" ng-click="vm.modal.cancel()" class="close">
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Close</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 mx-auto">
+                    <div class="alert alert-danger" ng-show="vm.error">{{ vm.error }}</div>
+                    <div class="col-sm-12 p-0 mb-2">
+                        <div class="fm-group fm-group-12">
+                            <label>Name*</label>
+                            <input type='text' name='author' ng-model="vm.formData.name" />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 p-0 mb-2">
+                        <div class="fm-group fm-group-12">
+                            <label for="rating-spinner">Ratings*</label>
+                            <span class="select-wrap">{{ vm.formData.rating }}</span>
+                            <span class="select-caret">
+                                <span class="fa fa-caret-down"></span>
+                            </span>
+                            <select name="rating" id="rating-spinner" class="p-0" ng-model="vm.formData.rating">
+                                <option value="5" selected>5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 p-0 mb-2">
+                        <div class="fm-group fm-group-12">
+                            <label>Review*</label>
+                            <textarea name='review' ng-model="vm.formData.reviewText">
+                            </textarea>
+                        </div>
+                    </div>
+                    <small class="alert alert-info">* are required</small>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+                <button class="btn btn-block btn-xprimary mt-0" ng-click="vm.modal.submit ()">Submit</button>
+                <button class="btn btn-block btn-xprimary mt-0" ng-click="vm.modal.cancel ()">Cancel</button>
+        </div>
+    </form>
+</div>

@@ -24,7 +24,7 @@ calculateRating = (req,res,location) => {
                 sendJsonResponse(res,400,err);
                 return;
             }
-            sendJsonResponse(res,200,location);
+            sendJsonResponse(res,200,location.reviews[location.reviews.length-1]);
         });
    }
 };

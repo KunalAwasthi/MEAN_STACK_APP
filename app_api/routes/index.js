@@ -4,7 +4,7 @@ var router = express.Router();
 //controllers
 var ctrlLocations = require('../controllers/locations');
 var ctrlReviews   = require('../controllers/review');
-
+var ctrlAuth      = require('../controllers/Auth'); 
 /**
  * location routes 
 */
@@ -20,5 +20,11 @@ router.get('/locations/:locationid/reviews/:reviewid',ctrlReviews.readOne); //re
 router.post('/locations/:locationid/reviews',ctrlReviews.saveReview); //create
 router.put('/locations/:locationid/reviews/:reviewid',ctrlReviews.updateReview); //update
 router.delete('/locations/:locationid/reviews/:reviewid',ctrlReviews.deleteReview); //delete
+
+/**
+ * Auth End Point for JWT 
+*/
+router.post('/register',ctrlAuth.register);
+router.post('/login',ctrlAuth.login);
 
 module.exports = router;
