@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Loc = mongoose.model('Location');
+var User = mongoose.model('User');
 
 sendJsonResponse = (res,code,content) => {
     res.status(code);
@@ -37,9 +38,9 @@ updateRating = (req,res,location) => {
     });
 }
 
-AddReview = function(req,res,location) {
+AddReview = function(req,res,location,author) {
     location.reviews.push({
-        author:req.body.name,
+        author:author,
         rating:req.body.rating,
         reviewText:req.body.reviewText
     });
@@ -53,8 +54,33 @@ AddReview = function(req,res,location) {
     });
 };
 
+var getAuthor = function(req,res,location,callback){
+    if(req.payload && req.payload.email)
+    {
+        User.findOne({email:req.payload.email},function(err,user){
+            if(!user)
+            {
+                sendJsonResponse(res,404,{message:"user not found"});
+                return;
+            }
+            else if(err)
+            {
+                sendJsonResponse(res,404,err);
+                return;
+            }
+            callback(req,res,location,user.name);
+        });
+    }
+    else
+    {
+        sendJsonResponse(res,404,{message:"user not found"});
+        return;
+    }
+}
+
 module.exports.saveReview = function(req,res){
     var Locationid = req.params.locationid;
+    
     Loc.findById(Locationid)
     .exec(function(err,location) {
         if(err || !location)
@@ -62,9 +88,10 @@ module.exports.saveReview = function(req,res){
             sendJsonResponse(res,404,{messsage:"No Such Location Found."});
             return;
         }
-        AddReview(req,res,location);
+        getAuthor(req,res,location,AddReview);
     });
 };
+
 
 module.exports.readOne = function(req,res){
     var Locationid = req.params.locationid;
@@ -81,6 +108,26 @@ module.exports.readOne = function(req,res){
     });
 };
 
+var updateReview = function(req,res,location,author){
+    if(location && location.reviews.length > 0)
+    {
+        var review = location.reviews.id(req.params.reviewid); 
+        
+        review.author = author;
+        review.rating = req.body.rating;
+        review.reviewText = req.body.reviewText;
+        
+        location.save(function(err,location){
+            if(err)
+            {
+                sendJsonResponse(res,404,err);
+                return;
+            }
+            updateRating(req,res,location);
+        });
+    }   
+}
+
 module.exports.updateReview = function(req,res){
     var Locationid = req.params.locationid;
     var reviewid = req.params.reviewid;
@@ -88,26 +135,10 @@ module.exports.updateReview = function(req,res){
     .exec(function(err,location) {
         if(err || !location)
         {
-            sendJsonResponse(res,404,{messsage:"No Such Location Found."});
+            sendJsonResponse(res,404,{message:"No Such Location Found."});
             return;
         }
-        if(location && location.reviews.length > 0)
-        {
-            var review = location.reviews.id(reviewid); 
-            
-            review.author = req.body.name;
-            review.rating = req.body.rating;
-            review.reviewText = req.body.reviewText;
-            
-            location.save(function(err,location){
-                if(err)
-                {
-                    sendJsonResponse(res,404,{messsage:"No Such Location Found."});
-                    return;
-                }
-                updateRating(req,res,location);
-            });
-        }
+        getAuthor(req,res,location,updateReview);
     });
 };
 
