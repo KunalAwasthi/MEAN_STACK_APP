@@ -1,4 +1,3 @@
-
 function controller ($scope,Loc8erData,geolocation) {
     var vm = this;
     vm.pageHeader = {

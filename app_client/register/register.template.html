@@ -1,0 +1,58 @@
+<navigation></navigation>
+<div class="container">
+    <div id="banner" class="page-header">
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="row s-container">
+                        <div class="col-md-4 p-0">
+                            <div class="s-left-inner">
+                                <h1>Sign Up</h1>
+                                <p class="pl-2">High Life flexitarian small batch whatever meggings art party Kickstarter 8-bit photo booth.</p>
+                                <ul class="sup-left-ul p-0 pl-2">
+                                    <li><span class="fa fa-check"></span>&nbsp;narwhal cleanse 90's</li>
+                                    <li><span class="fa fa-check"></span>&nbsp;narwhal 8-bit put s</li>
+                                    <li><span class="fa fa-check"></span>&nbsp;narwhals cleanse 90's</li>
+                                </ul>
+                                <p>Already signed up, Sign in <a class="anchor-light" href="/signin">Here.</a></p>
+                            </div>
+                        </div>
+                        <div class="col-md-8 p-0">
+                            <div class="s-right-inner">
+                                <div class="row m-0">
+                                    <div class="col-md-12">
+                                        <div role="alert" ng-submit="vm.onSubmit()" ng-show="vm.formError" class="alert alert-danger ">
+                                            {{ vm.formError }}
+                                        </div>
+                                        <form ng-submit="vm.onSubmit()" class="form form-horizontal">
+                                            <div class="fm-group fm-group-6 clearfix">
+                                                <label for="name">Full Name</label>
+                                                <input ng-model="vm.cred.name" name="fname" id="fname" type="text" value=""/>
+                                            </div>
+                                            <div class="fm-group fm-group-12">
+                                                <label for="mail">Email Address</label>
+                                                <input ng-model="vm.cred.email" name="email" id="mail" type="text" value=""/>
+                                            </div>
+                                            <div class="fm-group fm-group-12">
+                                                <label for="pass">Password</label>
+                                                <input ng-model="vm.cred.password" name="password" id="pass" type="password"/>
+                                            </div>
+                                            <div class="fm-group fm-group-12">
+                                                <label for="cpass">Confirm Password</label>
+                                                <input ng-model="vm.cred.cpassword" name="cpassword" id="cpass" type="password"/>
+                                            </div>
+                                            <div class="fm-group fm-group-12 mt-1">
+                                                <button class="btn btn-block btn-xprimary">Sign Up</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer-generic></footer-generic>

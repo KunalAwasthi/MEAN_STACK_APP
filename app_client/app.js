@@ -7,6 +7,16 @@ function config ($routeProvider,$locationProvider) {
     controller:'homeCtrl',
     controllerAs:'vm'
     })
+    .when('/register', {
+        templateUrl: '/register/register.template.html',
+        controller:'registerCtrl',
+        controllerAs:'vm'
+    })
+    .when('/login', {
+        templateUrl: '/login/login.view.html',
+        controller:'loginCtrl',
+        controllerAs:'vm'
+    })
     .when('/about', {
         templateUrl: '/about/about.view.html',
         controller:'abtCtrl',
